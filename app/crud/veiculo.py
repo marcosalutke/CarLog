@@ -1,19 +1,19 @@
 from sqlalchemy.orm import Session 
-from app.models.veiculo import Veiculo as models
+from app.models.veiculo import Veiculo
 from app.schemas import veiculo as schemas
 
 # Busca veículo por placa. 
 def get_veiculo_by_placa(db: Session, placa: str):
-    return db.query(models.Veiculo).filter(models.Veiculo.placa == placa).first()
+    return db.query(Veiculo).filter(Veiculo.placa == placa).first()
 
 #Lista todos os veículos, com filtro de skip e limit. 
 def get_veiculos(db: Session, skip: int = 0, limit: int = 100):
-    return db.query(models.Veiculo).offset(skip).limit(limit).all()
+    return db.query(Veiculo).offset(skip).limit(limit).all()
 
 #Salva um novo veículo no banco de dados.
 def create_veiculo(db: Session, veiculo: schemas.VeiculoCreate): 
      # Transforma o schema de entrada em um modelo de banco de dados.
-    db_veiculo = models.Veiculo(
+    db_veiculo = Veiculo(
         marca=veiculo.marca,
         modelo=veiculo.modelo,
         ano=veiculo.ano,
