@@ -1,68 +1,65 @@
 🚗 CarLog API
-API REST de Gerenciamento Veicular focada em performance, escalabilidade e organização de dados.
+Monitoramento Veicular Inteligente: Integrando Telemetria e Engenharia de Software para Manutenção Preditiva.
 
-📌 Sobre o Projeto
-O CarLog nasceu de uma necessidade real de centralizar e automatizar o histórico de manutenção e custos operacionais de veículos. Em um cenário onde o controle de gastos automotivos ainda é feito em planilhas manuais ou papel, a CarLog API oferece uma interface robusta para que proprietários e gestores tenham dados precisos na palma da mão.
+📌 Visão Geral
+O CarLog é uma solução de backend robusta que une a Engenharia Mecânica/Elétrica ao desenvolvimento de software moderno. O objetivo central é transformar a gestão veicular reativa em uma estratégia preditiva, utilizando dados reais do automóvel para antecipar falhas e otimizar custos.
 
-Este projeto reflete minha transição da Engenharia de Hardware/Mecânica para a Engenharia de Software, aplicando lógica rigorosa de manutenção preditiva em um ambiente digital moderno.
+Este projeto reflete minha capacidade de aplicar lógica de engenharia em sistemas de software, focando em automação de diagnósticos e integridade de dados.
 
-🚀 Por que esta Stack?
-A escolha das tecnologias foi baseada em critérios de mercado e eficiência técnica:
+🛠️ O Diferencial: Integração com Scanner OBD2
+O grande diferencial técnico deste projeto é o suporte à leitura de dados via Scanners OBD2.
 
-Python 3.13.7: Utilização da versão mais recente para aproveitar melhorias de performance e tipagem.
+Análise em Tempo Real: A API foi desenhada para processar fluxos de dados vindos diretamente da ECU (unidade de controle eletrônico) do veículo.
 
-FastAPI: Escolhido pela alta performance (comparável a NodeJS e Go) e pela geração automática de documentação (Swagger), o que acelera o ciclo de desenvolvimento e integração.
+Manutenção Preditiva Personalizada: Mesmo sem o controle total dos atuadores, o sistema utiliza o scanner para realizar uma análise diagnóstica do estado real e atual do carro (temperatura, sensores de oxigênio, carga de bateria, códigos DTC).
 
-PostgreSQL & Supabase: Garantia de integridade referencial para dados críticos (financeiro e mecânico). O Supabase foi utilizado como camada de persistência para facilitar o deploy e a escalabilidade.
+Inteligência de Dados: Em vez de depender de calendários fixos, os alertas de manutenção são gerados com base no comportamento e desgaste real monitorado pelo hardware, oferecendo uma visão personalizada para cada veículo.
 
-Docker: Para garantir que o ambiente de desenvolvimento seja idêntico ao de produção, facilitando o onboarding de novos desenvolvedores e a automação de CI/CD.
+🚀 Decisões Técnicas
+Python 3.13.7 & FastAPI: Escolhi essa stack pela sua natureza assíncrona e alta performance, fundamental para lidar com a recepção de logs de sensores em tempo real sem gargalos.
 
-🛠️ Funcionalidades Principais
-[x] Gestão de Veículos: Cadastro completo com marca, modelo, ano e placa.
+PostgreSQL (Supabase): Persistência de dados com foco em integridade referencial, garantindo que o histórico de telemetria e custos financeiros esteja sempre seguro e disponível.
 
-[x] Log de Manutenções: Registro detalhado de intervenções (óleo, freios, elétrica) com datas e custos.
+Tipagem Estrita (Pydantic): Uso intensivo de schemas para validar dados de hardware, evitando que inconsistências do scanner comprometam a base de dados.
 
-[x] Controle de Abastecimento: Monitoramento de consumo médio e eficiência por combustível.
+✨ Funcionalidades Principais
+[x] Processamento de Diagnósticos OBD2: Endpoint preparado para receber e interpretar parâmetros de sensores automotivos.
 
-[x] Documentação Automática: Endpoint /docs integrado para testes rápidos da API.
+[x] Sistema de Alertas Preditivos: Geração de notificações baseadas na análise de saúde do veículo em tempo real.
 
-[ ] Módulo de Alertas (Beta): Notificação automática para revisões baseada em quilometragem estimada.
+[x] Gestão Financeira de Manutenções: Controle detalhado de gastos com peças, serviços e insumos.
 
-🏗️ Arquitetura e Estrutura
-O projeto segue padrões de Clean Code e separação de responsabilidades:
+[x] Documentação Automática: Interface Swagger (OpenAPI) integrada para testes rápidos de integração via /docs.
+
+🏗️ Estrutura do Projeto
+O projeto segue padrões de Clean Code e organização em camadas:
 
 Plaintext
 ├── app/
-│   ├── api/          # Endpoints e Rotas
-│   ├── core/         # Configurações globais e segurança
+│   ├── api/          # Endpoints e Gerenciamento de Rotas
+│   ├── core/         # Configurações de ambiente e segurança
 │   ├── models/       # Modelos do Banco de Dados (SQLAlchemy)
 │   ├── schemas/      # Validação de dados e Tipagem (Pydantic)
-│   └── services/     # Lógica de negócio (Regras de manutenção)
-├── docker-compose.yml
-├── Dockerfile
-└── main.py
-🚦 Como Rodar o Projeto
+│   └── services/     # Lógica de negócio e Processamento OBD2
+├── main.py           # Ponto de entrada da aplicação
+└── requirements.txt  # Lista de dependências
+
+🚦 Como Executar
+
 Clone o repositório:
-
-Bash
 git clone https://github.com/seu-usuario/carlog-api.git
-Configure as variáveis de ambiente:
-Crie um arquivo .env com suas credenciais do PostgreSQL/Supabase.
 
-Suba o container Docker:
+Crie e ative um ambiente virtual:
+python -m venv venv
+source venv/bin/activate  # No Windows: venv\Scripts\activate
 
+Instale as dependências:
 Bash
-docker-compose up -d
-Acesse a documentação:
-Acesse http://localhost:8000/docs para visualizar o Swagger UI.
+pip install -r requirements.txt
 
-📈 Resultado Final e Evolução
-O resultado é uma API resiliente, com baixo tempo de resposta e pronta para ser consumida por aplicações Web ou Mobile.
+Inicie o servidor localmente:
+Bash
+uvicorn main:app --reload
 
-Próximos passos:
-
-Implementação de Testes Unitários com pytest.
-
-Integração de Autenticação JWT.
-
-Dashboard visual para análise de gastos mensais.
+📈 A engenharia por trás do projeto
+O CarLog nasceu da vontade de eliminar a incerteza na manutenção veicular. O próximo passo do projeto é a implementação de um módulo de Machine Learning leve para identificar padrões de falhas futuras com base no histórico de dados do scanner OBD2, elevando ainda mais o nível de precisão das manutenções preditivas.
