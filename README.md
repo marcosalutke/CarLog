@@ -47,7 +47,7 @@ Plaintext
 🚦 Como Executar
 
 Clone o repositório:
-git clone https://github.com/seu-usuario/carlog-api.git
+git clone https://github.com/marcosalutke/CarLog.git
 
 Crie e ative um ambiente virtual:
 python -m venv venv
